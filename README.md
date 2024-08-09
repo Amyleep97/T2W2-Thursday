@@ -2,7 +2,7 @@
 
 # What is a PostgreSQL?
 
-- It is a structured query languages, they are used to deal with data base in a well formated way.
+- It is structured query languages, they are used to deal with data base in a well formated way.
 - They have their own documentation it will have in depth information
 - It's a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.
 - Has different data types
@@ -119,7 +119,7 @@ CREATE DATABASE college;
 
 # How to Create a table
 
-- Type in 
+- You should opne up the list of tables then type in 
 
 ```
 CREATE TABLE
@@ -154,6 +154,22 @@ Ctrl + c
 ```
 INSERT INTO student (student_name, age) VALUES ('David', 20), ('John', 22);
 ```
+- Another example 
+
+```
+college=# INSERT INTO courses (course_name, course_description, duration) VALUES
+college-# ('Database', 'Intro to Database concepts', 3),
+college-# ('Programming', 'Learn basic programing skills', 4),
+college-# ('Web Dev', NULL, 5);
+```
+
+# Result:
+
+
+![Inserting into courses](https://github.com/user-attachments/assets/31a9ad9e-38d9-4896-98fe-c362b6cabf22)
+
+![Insert intop course part 2](https://github.com/user-attachments/assets/4a111bb8-fc5c-4ea5-8a26-a095b95f4068)
+
 
 # How to view everything in the table
 
@@ -216,4 +232,86 @@ college=# SELECT * FROM student ORDER BY student_id;
 ```
 UPDATE student SET address='Sydney' WHERE student_id=2 OR student_id=3 ;
 ```
+
+# How to Select something from a table
+
+- An example like only viewing the names starting with the letter "J":
+  
+```
+SELECT * FROM student WHERE student_name LIKE 'J%';
+```
+# Result:
+```
+college=# SELECT * FROM student WHERE student_name LIKE 'J%';
+ student_id | student_name | age |  address
+------------+--------------+-----+-----------
+          7 | Jack         |  20 | Melbourne
+          2 | John         |  22 | Sydney
+          3 | Jane         |  21 | Sydney
+(3 rows)
+```
+- An example of if you want to select a name that has the letter "k" in it:
+  
+```
+SELECT * FROM student WHERE student_name LIKE '%k%';
+```
+
+# Result:
+
+```
+student_id | student_name | age |  address
+------------+--------------+-----+-----------
+          7 | Jack         |  20 | Melbourne
+(1 row)
+```
+
+# Using underscore for other purposes called fill in the blanks for example:
+
+```
+SELECT * FROM student WHERE student_name LIKE '_a%';
+```
+
+# Result:
+
+```
+ student_id | student_name | age |  address
+------------+--------------+-----+-----------
+          7 | Jack         |  20 | Melbourne
+          1 | David        |  20 | Brisbane
+          3 | Jane         |  21 | Sydney
+(3 rows)
+```
+
+# Deleting
+
+- If we want to delete something for example 'David' we would type in:
+  
+```
+DELETE FROM student WHERE address='Brisbane';
+```
+- If the condition matches multiple entry it will delete all of them.
+- To delete an entry with a null address just type in:
+```
+DELETE FROM student WHERE address IS null;
+```
+
+- When using the keys you need to define them
+
+# Cascading 
+
+## First you need to alter the table:
+ 
+![Cascading](https://github.com/user-attachments/assets/2b095bf5-0552-4f30-b4ba-2f8012621c94)
+
+## Then go into the table and you can now delete:
+  
+
+![cascading part 2](https://github.com/user-attachments/assets/cfc37a52-a7c4-4bd7-aa49-0b5f933708d1)
+
+- When you want to leave use this command:
+  
+```
+\q
+``` 
+- This will take you back to the root folder and out of postgreSQL:
 
